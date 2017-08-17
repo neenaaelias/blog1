@@ -1,0 +1,116 @@
+﻿.header {
+background-image: url('../lib/img/flower_vase_glass_table_97031_1920x1080.jpg');
+
+}
+
+
+.about {
+    color: #ed1636;
+    background-image: url('../lib/img/1.jpg');
+    background-repeat: no-repeat;
+    background-image: url('../lib/img/martinrak02d.jpg');
+    background-size: 100% 100%;
+        background-color:#9fddf5
+}
+.n{
+    color:#ed1636;
+}
+
+
+.try{
+    color:#000000;
+
+}
+
+
+.again{
+    color:#000000;
+
+}
+
+#contacto{
+    color:#b51a28;
+}
+
+.project{
+    color:blue;
+}
+
+.portfolio {
+    /*background-image: url('../lib/img/portfolio-1.jpg');*/
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-color:#84d0ed;
+}
+
+#btn{
+
+    background-color:#9af16c
+}
+
+
+.fonet{
+    color:#ef3838;
+    font-size:20px;
+}
+.fact{
+    color:black;
+}
+.pal{
+    color:black
+
+}
+
+#number{
+    color:black;
+}
+
+.colo{
+    color:black
+}
+
+.modal-title{
+    color:black
+}
+.size{
+    height: 200px;
+    width:200px;
+
+}
+
+
+.size1{
+    height: 720px;
+    width:200px;
+
+}
+  #one{
+        color:#580606
+    }
+  .dive {
+    font-family:Garamond;
+
+
+    height: 100px;
+
+    position: relative;
+    animation-timing-function: linear;
+    animation: mymove 2s;
+    animation-fill-mode: forwards;
+    color:#d3a1a1
+}
+
+@-moz-keyframes mymove {
+    from {bottom: 0px;}
+    to {bottom: 10px;}
+}
+
+@-webkit-keyframes mymove {
+    from {bottom: 0px;}
+    to {bottom: 10px;}
+}
+
+@keyframes mymove {
+    from {bottom: 0px;}
+    to {bottom: 10px;}
+}

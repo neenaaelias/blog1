@@ -1,0 +1,226 @@
+﻿@model blog1.Models.BlogPost
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<p>
+
+        @Html.ActionLink("Back to Blog", "UserIndex")
+
+</p>
+@if (Request.IsAuthenticated)
+{
+    if (User.IsInRole("Admin"))
+    {
+        <p>
+
+            @Html.ActionLink("Back to AdminBlog", "Index")
+        </p>
+    }
+}
+
+@*@if (Request.IsAuthenticated)
+{
+    if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+    {
+
+        <h2>Details</h2>
+    }
+}
+<div>
+    @if (Request.IsAuthenticated)
+    {
+        <h4>BlogPost</h4>
+        <hr />
+    }*@
+
+
+    @*<dl class="dl-horizontal"  style="text-align:center">
+        @if (Request.IsAuthenticated)
+        {
+            if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.Created)
+                </dt>
+
+
+                <dd>
+                    @Html.DisplayFor(model => model.Created)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Updated)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Updated)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Slug)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Slug)
+                </dd>
+
+            }
+        }*@
+                @*<dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>*@
+<dl class="dl-horizontal" style="text-align:center">
+    <dd>
+        <h5 style="color :red"> @Html.DisplayFor(model => model.Title)</h5>
+    </dd>
+
+
+    <dd>
+        @*@Html.DisplayFor(model => model.MediaUrl)*@
+        @if (Model.MediaUrl != null)
+        {
+            <img src="@Model.MediaUrl" alt=""height="400" width="600">
+        }
+        @*<img class="img-responsive" src="@item.MediaUrl" alt="">*@
+    </dd>
+    @*<dt>
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>*@
+
+    <dd>
+        @Html.Raw(Model.Body)
+    </dd>
+
+    @*<dt>
+            @Html.DisplayNameFor(model => model.MediaUrl)
+            @Html.Raw(item.Body)
+        @*</dt>*@
+
+
+    @*<dt>
+            @Html.DisplayNameFor(model => model.Published)
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Published)
+        </dd>*@
+
+
+
+</dl>
+
+
+
+
+
+
+
+@*<hr />*@
+
+<div class="row">
+    <div class="col-md-12">
+        @* Model.Comments - collection of comments in the Model named Comments that is in a BlogPosts*@
+        @* var comment in Model.Comments - a single comment "object" thats has been pulled out from Model.comment*@
+        @* foreach loop - for each number of blogpost comments*@
+        @foreach (var comment in Model.Comments)
+        {
+            //var sameUser = User.Identity.GetUserId();
+            //From the list,  we are grabbing every 'Comments'
+
+                <h3>@comment.Body</h3>
+                <div>
+                    @if (comment.Author.DisplayName != null)
+                {
+                        <div>
+                            <h6> by @comment.Author.DisplayName on @comment.Created </h6><br />
+
+
+                        </div>
+                    }
+                    else
+                    {
+                        <h3>@comment.Author.Email</h3>
+                        <h5>@comment.Created</h5>
+                    }
+
+                </div>
+
+            if (Request.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                {
+                    <br>
+                    <div class="btn btn-success">
+                        @Html.ActionLink(linkText: "Edit", actionName: "Edit", controllerName: "Comments", routeValues: new { slug = Model.Slug, id = comment.Id }, htmlAttributes: "")
+                    </div>
+
+                        <div class="btn btn-success">
+                            @Html.ActionLink(linkText: "Delete", actionName: "Delete", controllerName: "Comments", routeValues: new { slug = Model.Slug, id = comment.Id }, htmlAttributes: "")
+                        </div>
+                }
+            }
+        }
+        @* This is a form we use to create a comment by accessing the "create" actionresult from the "comments" controller  *@
+        <div class="container text-center">
+            @using (Html.BeginForm("Create", "Comments", FormMethod.Post))
+            {
+                if (Request.IsAuthenticated)
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="PostId" value="@Model.Id" />
+                    <div align="left">
+                        <div class="form-group">
+                            <label for="comment-new_textarea" class="sr-only">Enter your comment</label>
+                            <br />
+
+                        </div>
+                    </div>
+
+
+                        <p>
+                            @Html.ActionLink(linkText: "Add Comment",
+                       actionName: "Create",
+                       controllerName: "Comments",
+                       routeValues: new { slug = Model.Slug },
+                       htmlAttributes: null)
+                        </p>
+
+
+
+
+                        <br />
+                        <br />
+                        <br />
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@*<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            @if (Request.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Back", "Index", "BlogPosts")
+                }
+            }
+
+        </div>
+    </div>
+</div>*@

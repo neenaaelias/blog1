@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+
+    @*@Styles.Render("../myblog/css/site.css" )*@
+    @*@Styles.Render( "../myblog/lib/blog template/css/clean-blog.css")*@
+    @*@Styles.Render("../myblog/lib/css/bootstrap.css" )*@
+    @*@Styles.Render("../myblog/lib/css/stylish-portfolio.css")*@
+    @*@Styles.Render("../myblog/lib/font-awesome/css/font-awesome.css")*@
+
+    <link href="~/myblog/lib/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/myblog/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/myblog/css/site.css" rel="stylesheet" />
+    <link href="~/myblog/lib/blog template/css/clean-blog.css" rel="stylesheet" />
+    <link href="~/myblog/lib/css/stylish-portfolio.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>*@
+    @*</div>*@
+    <div class="container">
+        @RenderBody()
+        <hr />
+
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
+    <script src="~/myblog/lib/blog template/vendor/jquery/jquery.js"></script>
+    <script src="~/myblog/lib/blog template/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="~/myblog/javascript/fact.js"></script>
+    <script src="~/myblog/javascript/fizzbuzz.js"></script>
+    <script src="~/myblog/javascript/numbers.js"></script>
+    <script src="~/myblog/javascript/palindrome.js"></script>
+    <script src="~/myblog/lib/blog template/js/clean-blog.js"></script>
+    <script src="~/myblog/lib/blog template/js/contact_me.js"></script>
+    <script src="~/myblog/lib/blog template/js/jqBootstrapValidation.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+@*@Scripts.Render("../myblog/javascript/fact.js")
+@Scripts.Render("../myblog/javascript/numbers.js")
+@Scripts.Render("../myblog/javascript/palindrome.js")
+@<img src="../my(blog/lib/img/4491720-hd-nature-wallpapers.jpg" />
+@Scripts.Render("../myblog/lib/blog template/js/jqbootstrapvalidation.js")
+@Scripts.Render("../myblog/lib/blog template/js/contact_me.js")
+@Scripts.Render("../myblog/lib/blog template/js/clean-blog.js")*@

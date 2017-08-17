@@ -1,0 +1,87 @@
+﻿@model IPagedList<blog1.Models.BlogPost>
+@using PagedList;
+@using PagedList.Mvc;
+@using (Html.BeginForm("UserIndex", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class = "form" }))
+{
+    @*<div class="services-wrapper" style="max-width:273px; margin:auto; margin-bottom:40px">
+            <form>
+                <div class="input-group">
+                    <input type="text" name="query" id="query" placeholder="Search my blog!" class="form-control">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>*@
+    <div class="services-wrapper" style="max-width:273px; margin:auto; margin-bottom:40px">
+        <div class="controls controls-row search-row">
+            <input id="searchstr" name="searchstr" class="input-block-level" type="text" placeholder="@ViewBag.search" />
+            <button id="searchstr" name="searchstr" class="btn btn-primary" type="submit">
+
+                <i class="icon-search">go</i>
+            </button>
+        </div>
+    </div>
+}
+@{
+            ViewBag.Title = "UserIndex";
+}
+@*<h2>Index</h2>*@
+<div align="center">
+    <div class="divn">
+        <div class="dive">
+
+            <strong><h3>WELCOME TO MY BLOG</h3></strong>
+        </div>
+    </div>
+    </div>
+    @if (Request.IsAuthenticated)
+    {
+        if (User.IsInRole(("Admin")) || (User.IsInRole("Moderator")))
+        {
+            @Html.ActionLink("admin/moderator view", "Index", "BlogPosts")
+        }
+    }
+    <div container>
+        <div class="container-fluid">
+            <div class="row">
+    @foreach (var item in Model)
+            {
+        <div class="col-md-4">
+            <div class="dive">
+                <h3 style="text-shadow: 0 0 3px #7415ad, 0 0 5px #ff6a00">@Html.DisplayFor(modelItem => item.Title)</h3>
+                <div class="parent">
+                    <img class="child" src="@item.MediaUrl" alt="" height="172" width="172">
+                    <br />
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+                @Html.ActionLink("Comments", "Details", new { Slug = item.Slug })
+
+        </div>
+
+
+    }
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <div id="nooo"><h5 @*style="color:#ff0000"*@>***Register for comments***</h5></div>
+        <div align="center">
+            <div class="pagination">
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            </div>
+            @Html.PagedListPager(Model, page => Url.Action("UserIndex", new { page, searchStr = ViewBag.Search }))
+        </div>
+    </div>

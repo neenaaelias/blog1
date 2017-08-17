@@ -1,0 +1,148 @@
+﻿@model IPagedList<blog1.Models.BlogPost>
+@using PagedList;
+@using PagedList.Mvc;
+@using (Html.BeginForm("Index", "BlogPosts", FormMethod.Get, htmlAttributes: new { @class = "form" }))
+{
+    <div class="controls controls-row search-row">
+        <input id="searchStr" name="searchStr" class="input-block-level" type="text" placeholder="@ViewBag.search" />
+        <button id="searchStr" name="searchStr" class="btn btn-success" type="submit">
+
+            <i class="icon-search">go</i>
+        </button>
+    </div>
+}
+@{
+    ViewBag.Title = "Index";
+}
+@*<h2>Index</h2>*@
+@if (Request.IsAuthenticated)
+{
+    if ((User.IsInRole("Admin")) || (User.IsInRole("Moderator")))
+    {
+        @Html.ActionLink("user view", "UserIndex")
+
+    }
+}
+<div container>
+    @if (Request.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            <p>
+                @Html.ActionLink("Create New","Create")
+            </p>
+        }
+        <table class="table">
+            <tr>
+                @if (User.IsInRole("Admin"))
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Created)
+                        @*Created*@
+                    </th>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+
+                    <th>
+                        updated
+                    </th>
+                }
+                <th>
+                    title
+                </th>
+                @if (User.IsInRole("Admin"))
+                {
+                    <th>
+                        slug
+                    </th>
+                }
+                <th>
+                    body
+                </th>
+                <th>
+                    @Html.Label(" mediaURL")
+                </th>
+                @if (User.IsInRole("Admin"))
+                {
+                    <th>
+                        published
+                    </th>
+                }
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Created)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Updated)
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Slug)
+                        </td>
+                    }
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Body)*@
+                        @Html.Raw(item.Body)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.MediaUrl)*@
+                        <img class="img-responsive" src="@item.MediaUrl" alt="">
+                    </td>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Published)
+                        </td>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+
+                            <td>
+                                @*@Html.ActionLink("Edit", "Edit", new { slug = item.Slug }) |*@
+                                @Html.ActionLink("Details", "Details", new { Slug = item.Slug })
+
+                            </td>
+                    }
+                    <td>
+                        @Html.ActionLink(linkText: "Add Comment",
+                       actionName: "Create",
+                       controllerName: "Comments",
+                       routeValues: new { slug = item.Slug },
+                       htmlAttributes: null)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+    <div align="center">
+        <div class="pagination">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        </div>    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchStr = ViewBag.Search }))
+
+    </div>
+
+
+</div>

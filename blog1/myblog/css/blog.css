@@ -1,0 +1,68 @@
+﻿
+/*.tomy{
+    background-image: url('../lib/img/1.jpg');
+    background-repeat: no-repeat;
+
+    background-size:100% 100%;
+}*/
+.hoo {
+
+    color: #0094ff;
+}
+.navbar navbar-inverse navbar-fixed-top{
+    background-color:blue;
+}
+
+
+#msg, #msg2 {
+    color: blue;
+}
+
+#nooo {
+    color: #ff00b4;
+}
+
+
+.child {
+    border: 3px solid #098ae6;
+    background-color: #ffffff; /* fallback color */
+
+  background-position: center;
+  background-size: cover;
+}
+.parent:hover .child,
+.parent:focus .child {
+    transform: scale(1.5);
+}
+
+.dive {
+    font-family:Garamond;
+    width: 300px;
+
+    height: 100px;
+
+    position: relative;
+    animation-timing-function: linear;
+    animation: mymove 2s;
+    animation-fill-mode: forwards;
+    color:#0f4de2
+}
+
+@-moz-keyframes mymove {
+    from {bottom: 0px;}
+    to {bottom: 10px;}
+}
+
+@-webkit-keyframes mymove {
+    from {bottom: 0px;}
+    to {bottom: 10px;}
+}
+
+@keyframes mymove {
+    from {bottom: 0px;}
+    to {bottom: 10px;}
+}
+
+.divn{
+    height:50px;
+}
